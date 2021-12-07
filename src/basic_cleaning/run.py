@@ -50,6 +50,10 @@ def go(args):
     df['last_review'] = pd.to_datetime(df['last_review'])
     logging.info("The last_review feature changed to datetime type")
 
+    # Remove amples outside of NYC boundary
+    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    df = df[idx]
+
     # Export cleaned artifact
     # Save processed data to a csv file
     filename = 'clean_sample.csv'
