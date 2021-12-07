@@ -1,4 +1,14 @@
-# Build an ML Pipeline for Short-Term Rental Prices in NYC
+# Project overview
+This is the second project of the [Udacity Machine Learning DevOps Engineer nanodegree](https://www.udacity.com/course/machine-learning-dev-ops-engineer-nanodegree--nd0821). This part of the course focused on developing a reproducible model workflow, largely by using the [MLflow](https://mlflow.org/) package and [Weights & Biases](https://wandb.ai).
+
+Udacity provided some starter code and instructions for completing the project which are outlined in the next section.
+
+The experiments and artifacts for this project were tracked using Weights & Biases. My project can be found [here](https://wandb.ai/robsmith155/nyc_airbnb?workspace=user-robsmith155)
+
+The code for my project is stored on GitHub [here](https://github.com/robsmith155/nd0821-c2-build-model-workflow-starter)
+
+# Instructions provided by Udacity
+## Build an ML Pipeline for Short-Term Rental Prices in NYC
 You are working for a property management company renting rooms and properties for short periods of 
 time on various rental platforms. You need to estimate the typical price for a given property based 
 on the price of similar properties. Your company receives new data in bulk every week. The model needs 
@@ -6,7 +16,7 @@ to be retrained with the same cadence, necessitating an end-to-end pipeline that
 
 In this project you will build such a pipeline.
 
-## Table of contents
+### Table of contents
 
 - [Introduction](#build-an-ML-Pipeline-for-Short-Term-Rental-Prices-in-NYC)
 - [Preliminary steps](#preliminary-steps)
@@ -31,8 +41,8 @@ In this project you will build such a pipeline.
   * [Train the model on a new data sample](#train-the-model-on-a-new-data-sample)
 - [Cleaning up](#cleaning-up)
 
-## Preliminary steps
-### Fork the Starter kit
+### Preliminary steps
+#### Fork the Starter kit
 Go to [https://github.com/udacity/nd0821-c2-build-model-workflow-starter](https://github.com/udacity/nd0821-c2-build-model-workflow-starter)
 and click on `Fork` in the upper right corner. This will create a fork in your Github account, i.e., a copy of the
 repository that is under your control. Now clone the repository locally so you can start working on it:
@@ -49,7 +59,7 @@ cd nd0821-c2-build-model-workflow-starter
 Commit and push to the repository often while you make progress towards the solution. Remember 
 to add meaningful commit messages.
 
-### Create environment
+#### Create environment
 Make sure to have conda installed and ready, then create a new environment using the ``environment.yml``
 file provided in the root of the repository and activate it:
 
@@ -58,7 +68,7 @@ file provided in the root of the repository and activate it:
 > conda activate nyc_airbnb_dev
 ```
 
-### Get API key for Weights and Biases
+#### Get API key for Weights and Biases
 Let's make sure we are logged in to Weights & Biases. Get your API key from W&B by going to 
 [https://wandb.ai/authorize](https://wandb.ai/authorize) and click on the + icon (copy to clipboard), 
 then paste your key into this command:
@@ -72,7 +82,7 @@ You should see a message similar to:
 wandb: Appending key for api.wandb.ai to your netrc file: /home/[your username]/.netrc
 ```
 
-### Cookie cutter
+#### Cookie cutter
 In order to make your job a little easier, you are provided a cookie cutter template that you can use to create 
 stubs for new pipeline components. It is not required that you use this, but it might save you from a bit of 
 boilerplate code. Just run the cookiecutter and enter the required information, and a new component 
@@ -108,7 +118,7 @@ The script ``run.py`` will receive the input parameters ``parameter1``, ``parame
 > mlflow run src/step_name -P parameter1=1 -P parameter2=2 -P parameter3="test"
 ```
 
-### The configuration
+#### The configuration
 As usual, the parameters controlling the pipeline are defined in the ``config.yaml`` file defined in
 the root of the starter kit. We will use Hydra to manage this configuration file. 
 Open this file and get familiar with its content. Remember: this file is only read by the ``main.py`` script 
@@ -121,7 +131,7 @@ the configuration file. It can be accessed from the ``go`` function as
 NOTE: do NOT hardcode any parameter when writing the pipeline. All the parameters should be 
 accessed from the configuration file.
 
-### Running the entire pipeline or just a selection of steps
+#### Running the entire pipeline or just a selection of steps
 In order to run the pipeline when you are developing, you need to be in the root of the starter kit, 
 then you can execute as usual:
 
@@ -151,7 +161,7 @@ modeling -> random_forest -> n_estimators to 10 and etl->min_price to 50:
   -P hydra_options="modeling.random_forest.n_estimators=10 etl.min_price=50"
 ```
 
-### Pre-existing components
+#### Pre-existing components
 In order to simulate a real-world situation, we are providing you with some pre-implemented
 re-usable components. While you have a copy in your fork, you will be using them from the original
 repository by accessing them through their GitHub link, like:
@@ -175,7 +185,7 @@ You can see the parameters that they require by looking into their `MLproject` f
 - `get_data`: downloads the data. [MLproject](https://github.com/udacity/nd0821-c2-build-model-workflow-starter/blob/master/components/get_data/MLproject)
 - `train_val_test_split`: segrgate the data (splits the data) [MLproject](https://github.com/udacity/nd0821-c2-build-model-workflow-starter/blob/master/components/train_val_test_split/MLproject)
 
-## In case of errors
+### In case of errors
 When you make an error writing your `conda.yml` file, you might end up with an environment for the pipeline or one
 of the components that is corrupted. Most of the time `mlflow` realizes that and creates a new one every time you try
 to fix the problem. However, sometimes this does not happen, especially if the problem was in the `pip` dependencies.
@@ -197,7 +207,7 @@ If you are ok with that list, execute this command to clean them up:
 This will iterate over all the environments created by `mlflow` and remove them.
 
 
-## Instructions
+### Instructions
 
 The pipeline is defined in the ``main.py`` file in the root of the starter kit. The file already
 contains some boilerplate code as well as the download step. Your task will be to develop the
@@ -207,7 +217,7 @@ __*NOTE*__: the modeling in this exercise should be considered a baseline. We ke
 simple because we want to focus on the MLops aspect of the analysis. It is possible with a little more effort to get
 a significantly-better model for this dataset.
 
-### Exploratory Data Analysis (EDA)
+#### Exploratory Data Analysis (EDA)
 The scope of this section is to get an idea of how the process of an EDA works in the context of
 pipelines, during the data exploration phase. In a real scenario you would spend a lot more time
 in this phase, but here we are going to do the bare minimum.
@@ -282,7 +292,7 @@ notebook can be understood by other people like your colleagues
 8. Save the notebook, then close it (File -> Close and Halt). In the main Jupyter notebook page, click Quit in the
    upper right to stop Jupyter. This will also terminate the mlflow run. DO NOT USE CRTL-C
 
-## Data cleaning
+### Data cleaning
 
 Now we transfer the data processing we have done as part of the EDA to a new ``basic_cleaning`` 
 step that starts from the ``sample.csv`` artifact and create a new artifact ``clean_sample.csv`` 
@@ -378,7 +388,7 @@ with the cleaned data:
 5. Run the pipeline. If you go to W&B, you will see the new artifact type `clean_sample` and within it the 
    `clean_sample.csv` artifact
 
-### Data testing
+#### Data testing
 After the cleaning, it is a good practice to put some tests that verify that the data does not
 contain surprises. 
 
@@ -428,7 +438,7 @@ DeprecationWarning: Using or importing the ABCs from 'collections' instead of fr
 is deprecated since Python 3.3, and in 3.10 it will stop working
 ```
 
-### Data splitting
+#### Data splitting
 Use the provided component called ``train_val_test_split`` to extract and segregate the test set. 
 Add it to the pipeline then run the pipeline. As usual, use the configuration for the parameters like `test_size`,
 `random_seed` and `stratify_by`. Look at the `modeling` section in the config file.
@@ -446,7 +456,7 @@ After you execute, you will see something like:
 ```
 in the log. This tells you that the script is uploading 2 new datasets: ``trainval_data.csv`` and ``test_data.csv``.
 
-### Train Random Forest
+#### Train Random Forest
 Complete the script ``src/train_random_forest/run.py``. All the places where you need to insert code are marked by
 a `# YOUR CODE HERE` comment and are delimited by two signs like `######################################`. You can
 find further instructions in the file.
@@ -456,7 +466,7 @@ Once you are done, add the step to ``main.py``. Use the name ``random_forest_exp
 **_NOTE_**: the main.py file already provides a variable ``rf_config`` to be passed as the
             ``rf_config`` parameter.
 
-### Optimize hyperparameters
+#### Optimize hyperparameters
 Re-run the entire pipeline varying the hyperparameters of the Random Forest model. This can be
 accomplished easily by exploiting the Hydra configuration system. Use the multi-run feature (adding the `-m` option 
 at the end of the `hydra_options` specification), and try setting the parameter `modeling.max_tfidf_features` to 10, 15
@@ -476,7 +486,7 @@ you can improve the performance. You can also look at the Hydra documentation fo
 optimization. Hydra is very powerful, and allows even to use things like Bayesian optimization without any change
 to the pipeline itself.
 
-### Select the best model
+#### Select the best model
 Go to W&B and select the best performing model. We are going to consider the Mean Absolute Error as our target metric,
 so we are going to choose the model with the lowest MAE.
 
@@ -500,7 +510,7 @@ Go to the artifact section of the selected job, and select the
 `model_export` output artifact.  Add a ``prod`` tag to it to mark it as 
 "production ready".
 
-### Test
+#### Test
 Use the provided step ``test_regression_model`` to test your production model against the
 test set. Implement the call to this component in the `main.py` file. As usual you can see the parameters in the
 corresponding [MLproject](https://github.com/udacity/nd0821-c2-build-model-workflow-starter/blob/master/components/test_regression_model/MLproject) 
@@ -515,11 +525,11 @@ activate it explicitly on the command line:
 > mlflow run . -P steps=test_regression_model
 ```
 
-### Visualize the pipeline
+#### Visualize the pipeline
 You can now go to W&B, go the Artifacts section, select the model export artifact then click on the
 ``Graph view`` tab. You will see a representation of your pipeline.
 
-### Release the pipeline
+#### Release the pipeline
 First copy the best hyper parameters you found in your ``configuration.yml`` so they become the
 default values. Then, go to your repository on GitHub and make a release. 
 If you need a refresher, here are some [instructions](https://docs.github.com/en/github/administering-a-repository/managing-releases-in-a-repository#creating-a-release)
@@ -532,7 +542,7 @@ Call the release ``1.0.0``:
 If you find problems in the release, fix them and then make a new release like ``1.0.1``, ``1.0.2``
 and so on.
 
-### Train the model on a new data sample
+#### Train the model on a new data sample
 
 Let's now test that we can run the release using ``mlflow`` without any other pre-requisite. We will
 train the model on a new sample of data that our company received (``sample2.csv``):
@@ -564,6 +574,6 @@ Then commit your change, make a new release (for example ``1.0.1``) and retry (o
 ``-v 1.0.1`` when calling mlflow this time). Now the run should succeed and voit la', 
 you have trained your new model on the new data.
 
-## License
+### License
 
 [License](LICENSE.txt)
