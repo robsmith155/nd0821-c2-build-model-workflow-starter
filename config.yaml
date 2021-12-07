@@ -9,6 +9,7 @@ etl:
   sample: "sample1.csv"
   min_price: 10  # dollars
   max_price: 350  # dollars
+  max_minimum_nights: 50 # number of nights
 data_check:
   kl_threshold: 0.2
 modeling:

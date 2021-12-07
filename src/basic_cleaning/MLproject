@@ -6,32 +6,32 @@ entry_points:
     parameters:
 
       input_artifact:
-        description: ## ADD DESCRIPTION
+        description: Fully qualified name for the artifact to be downloaded from W&B
         type: string
 
       output_artifact:
-        description: ## ADD DESCRIPTION
+        description: Name to give output artifact to be stored in W&B
         type: string
 
       output_type:
-        description: ## ADD DESCRIPTION
+        description: Type of the artifact to create
         type: string
 
       output_description:
-        description: ## ADD DESCRIPTION
+        description: Output artifact description
         type: string
 
       min_price:
-        description: ## ADD DESCRIPTION
-        type: string
+        description: Minimum value of price feature allowed
+        type: float
 
       max_price:
-        description: ## ADD DESCRIPTION
-        type: string
+        description: Maximum value of price feature allowed
+        type: float
 
       max_minimum_nights:
-        description: ## ADD DESCRIPTION
-        type: string
+        description: Maximum value of minimum_nights feature
+        type: int
 
 
     command: >-
