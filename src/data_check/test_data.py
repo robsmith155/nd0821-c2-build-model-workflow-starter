@@ -68,7 +68,7 @@ def test_row_count(data: pd.DataFrame):
     """
     Test to check that the size of the dataset is reasonable.
     """
-    assert len(data) <= 20000
+    assert len(data) <= 50000
     assert len(data) > 18000
 
 
