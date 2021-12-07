@@ -24,5 +24,9 @@ entry_points:
       max_price:
         description: Maximum accepted price
         type: float
+      
+      max_minimum_nights:
+        description: Maximum accepted miminum nights accepted
+        type: int
 
-    command: "pytest . -vv --csv {csv} --ref {ref} --kl_threshold {kl_threshold} --min_price {min_price} --max_price {max_price}"
+    command: "pytest . -s -vv --csv {csv} --ref {ref} --kl_threshold {kl_threshold} --min_price {min_price} --max_price {max_price} --max_minimum_nights {max_minimum_nights}"

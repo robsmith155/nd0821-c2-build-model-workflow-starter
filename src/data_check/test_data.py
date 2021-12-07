@@ -5,7 +5,7 @@ import scipy.stats
 
 def test_column_names(data):
 
-    expected_colums = [
+    expected_columns = [
         "id",
         "name",
         "host_id",
@@ -27,7 +27,7 @@ def test_column_names(data):
     these_columns = data.columns.values
 
     # This also enforces the same order
-    assert list(expected_colums) == list(these_columns)
+    assert list(expected_columns) == list(these_columns)
 
 
 def test_neighborhood_names(data):
@@ -63,3 +63,26 @@ def test_similar_neigh_distrib(data: pd.DataFrame, ref_data: pd.DataFrame, kl_th
 ########################################################
 # Implement here test_row_count and test_price_range   #
 ########################################################
+
+def test_row_count(data: pd.DataFrame):
+    """
+    Test to check that the size of the dataset is reasonable.
+    """
+    assert len(data) <= 20000
+    assert len(data) > 18000
+
+
+def test_price_range(data: pd.DataFrame, min_price: float, max_price:float):
+    """
+    Test to check that the price variable is in the specified range.
+    """
+    idx = data['price'].between(min_price, max_price)
+    assert np.sum(~idx) == 0
+
+
+def test_minimum_nights_range(data: pd.DataFrame, max_minimum_nights: int):
+    """
+    Test to check that the minimum_nights feature is within the specified range.
+    """
+    idx = data['minimum_nights'].between(0, max_minimum_nights)
+    assert np.sum(~idx) == 0

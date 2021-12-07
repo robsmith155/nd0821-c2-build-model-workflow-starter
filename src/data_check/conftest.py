@@ -9,6 +9,7 @@ def pytest_addoption(parser):
     parser.addoption("--kl_threshold", action="store")
     parser.addoption("--min_price", action="store")
     parser.addoption("--max_price", action="store")
+    parser.addoption("--max_minimum_nights", action="store")
 
 
 @pytest.fixture(scope='session')
@@ -69,3 +70,12 @@ def max_price(request):
         pytest.fail("You must provide max_price")
 
     return float(max_price)
+
+@pytest.fixture(scope='session')
+def max_minimum_nights(request):
+    max_minimum_nights = request.config.option.max_minimum_nights
+
+    if max_minimum_nights is None:
+        pytest.fail("You must provide max_minimum_nights")
+
+    return int(max_minimum_nights)
